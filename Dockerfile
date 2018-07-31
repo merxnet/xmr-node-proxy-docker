@@ -12,12 +12,15 @@ RUN apt-get update \
     && npm install
 
 
-FROM node:${NODE_VERSION}-alpine
+FROM node:${NODE_VERSION}-stretch
 
 LABEL maintainer='docker@merxnet.io'
 COPY --from=build /build /xmr-node-proxy
 
-RUN apk update && apk add --no-cache boost-dev
+RUN apt-get update \
+    && apt-get -y install --no-install-recommends libboost-all-dev \
+    && apt-get -y autoremove \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /xmr-node-proxy
 
