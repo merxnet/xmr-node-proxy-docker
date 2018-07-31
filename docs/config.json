@@ -16,7 +16,7 @@
   ],
   "listeningPorts": [
     {
-      "port": 8080,
+      "port": 3333,
       "ssl": false,
       "diff": 5000,
       "coin": "xmr"
