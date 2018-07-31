@@ -6,7 +6,7 @@ set -euo pipefail
 ## recompiled for each host for some unknown reason; otherwise,
 ## node exits with "Illegal instruction (core dumped)" error code 132
 echo "Rebuilding dependencies for host (this may take some time)..."
-npm rebuild --quiet
-npm cache clean --force --quiet
+npm rebuild
+npm cache clean
 
 exec "$@"
