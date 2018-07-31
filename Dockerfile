@@ -4,7 +4,7 @@ ARG NODE_VERSION=carbon
 FROM node:${NODE_VERSION}-stretch AS build
 
 RUN apt-get update \
-    && apt-get -y install --no-install-recommends build-essential cmake git libboost-all-dev python-virtualenv \
+    && apt-get -y install --no-install-recommends build-essential cmake git libboost-all-dev python-virtualenv nodejs \
     && git clone https://github.com/MoneroOcean/xmr-node-proxy.git \
     && mkdir build \
     && cp -r xmr-node-proxy/lib/ xmr-node-proxy/package.json xmr-node-proxy/proxy.js build/ \
