@@ -7,6 +7,5 @@ set -euo pipefail
 ## node exits with "Illegal instruction (core dumped)" error code 132
 echo "Rebuilding dependencies for host (this may take some time)..."
 npm rebuild
-npm cache clean
 
 exec "$@"
