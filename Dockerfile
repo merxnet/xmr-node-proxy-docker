@@ -5,8 +5,6 @@ FROM node:${NODE_VERSION}-slim
 
 LABEL maintainer='docker@merxnet.io'
 
-COPY lib/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
-
 RUN apt-get update \
     && apt-get -y install --no-install-recommends g++ git libboost-dev libboost-system-dev libboost-date-time-dev make nodejs python-virtualenv \
     && git clone https://github.com/MoneroOcean/xmr-node-proxy.git \
@@ -16,8 +14,10 @@ RUN apt-get update \
     && cd app/ \
     && npm install \
     && npm cache clean --force \
-    && rm -rf /var/lib/apt/lists/* \
-    && chmod a+x /usr/local/bin/docker-entrypoint.sh
+    && rm -rf /var/lib/apt/lists/*
+
+COPY lib/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod a+x /usr/local/bin/docker-entrypoint.sh
 
 WORKDIR /app
 
