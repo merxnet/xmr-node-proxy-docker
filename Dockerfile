@@ -1,7 +1,7 @@
 ARG NODE_VERSION=carbon
 
 
-FROM node:${NODE_VERSION}-stretch AS build
+FROM node:${NODE_VERSION}-slim AS build
 
 RUN apt-get update \
     && apt-get -y install --no-install-recommends build-essential cmake git libboost-all-dev python-virtualenv nodejs \
@@ -12,14 +12,13 @@ RUN apt-get update \
     && npm install
 
 
-FROM node:${NODE_VERSION}-stretch
+FROM node:${NODE_VERSION}-slim
 
 LABEL maintainer='docker@merxnet.io'
 COPY --from=build /build /xmr-node-proxy
 
 RUN apt-get update \
     && apt-get -y install --no-install-recommends libboost-all-dev \
-    && apt-get -y autoremove \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /xmr-node-proxy
