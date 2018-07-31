@@ -13,7 +13,17 @@ docker pull merxnet/xmr-node-proxy
 ```
 To get started, all you need is a [wallet](https://getmonero.org/resources/user-guides/create_wallet.html) and a [mining pool](https://monero.org/services/mining-pools/) of your choice, such as [MoriaXMR](https://moriaxmr.com/). Using the [example configuration](docs/config.json), create a config file with the appropriate wallet and pool and provide it to the container at runtime:
 ```
-docker run -p 8080:8080 -v config.json:/xmr-node-proxy/config.json:ro merxnet/xmr-node-proxy
+docker run -p 3333:3333 -v config.json:/xmr-node-proxy/config.json:ro merxnet/xmr-node-proxy
+```
+
+## Using SSL/TLS
+In order to securely connect to the proxy (e.g., over the Internet), the proxy can be configured to use HTTPS (SSL/TLS). First, modify the configuration file to use SSL -- that is, under `listeningPorts`, make sure the value of `ssl` is `true`. Next, use `openssl` to generate a self-signed certificate:
+```
+openssl req -subj "/C=IT/ST=Pool/L=Daemon/O=Mining Pool/CN=mining.proxy" -newkey rsa:2048 -nodes -keyout cert.key -x509 -out cert.pem -days 36500
+```
+Feel free to modify values as needed. The `cert.key` and `cert.pem` must then be passed to the container at runtime:
+```
+docker run -p 8443:8443 -v config.json:/xmr-node-proxy/config.json:ro -v cert.key:/xmr-node-proxy/cert.key:ro -v cert.pem:/xmr-node-proxy/cert.pem:ro merxnet/xmr-node-proxy
 ```
 
 ## Support
