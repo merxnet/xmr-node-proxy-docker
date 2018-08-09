@@ -23,7 +23,7 @@ openssl req -subj "/C=IT/ST=Pool/L=Daemon/O=Mining Pool/CN=mining.proxy" -newkey
 ```
 Feel free to modify values as needed. The `cert.key` and `cert.pem` must then be passed to the container at runtime:
 ```
-docker run -p 8443:8443 -v config.json:/app/config.json:ro -v cert.key:/app/cert.key:ro -v cert.pem:/app/cert.pem:ro merxnet/xmr-node-proxy
+docker run -p 9000:9000 -v config.json:/app/config.json:ro -v cert.key:/app/cert.key:ro -v cert.pem:/app/cert.pem:ro merxnet/xmr-node-proxy
 ```
 
 ## Support

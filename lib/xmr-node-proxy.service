@@ -1,0 +1,17 @@
+[Unit]
+Description=Cryptonote/Forknote/Cryptonight coin proxy for nodejs-pool
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker run --rm --name %n \
+            --net=host \
+            -v /etc/xmr-node-proxy/config.json:/app/config.json:ro \
+            -v /etc/xmr-node-proxy/cert.key:/app/cert.key:ro \
+            -v /etc/xmr-node-proxy/cert.pem:/app/cert.pem:ro \
+            merxnet/xmr-node-proxy
+ExecStop=/usr/bin/docker stop %n
+
+[Install]
+WantedBy=multi-user.target
