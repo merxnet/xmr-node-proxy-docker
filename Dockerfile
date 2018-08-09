@@ -21,7 +21,7 @@ RUN chmod a+x /usr/local/bin/docker-entrypoint.sh
 
 WORKDIR /app
 
-EXPOSE 3333 8080 8443
+EXPOSE 3333 8081 9000
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["node", "proxy.js"]
