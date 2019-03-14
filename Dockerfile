@@ -5,7 +5,7 @@ FROM node:${NODE_VERSION}-slim
 
 LABEL maintainer='docker@merxnet.io'
 
-ENV COMMIT 'b93ff42db816892f39f967e333de692b2f0a86ae'
+ENV COMMIT 'e17c0c55de7bf516a543084b1c761695fa065084'
 
 RUN apt-get update \
     && apt-get -y install --no-install-recommends g++ git libboost-dev libboost-system-dev libboost-date-time-dev make nodejs python-virtualenv \
